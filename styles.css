@@ -1,0 +1,443 @@
+/* =========================================================================
+   Dune — dunemv-site (static, v2 house spine · fancygroceries.com homage)
+   Palette (Dune's own — NOT fancygroceries'):
+     night #18262F · night-soft #21323D · oat #ECE4D4 · oat-deep #E2D8C3
+     brass #B8894A · brass-ink #6F5328 (AA small text on oat)
+   Type: Newsreader (display) · Schibsted Grotesk (sans/UI) · Space Mono (specs)
+   ========================================================================= */
+
+/* Native cross-document page transitions (free Swup replacement) */
+@view-transition { navigation: auto; }
+
+:root {
+  /* Palette per Dune owner notes (2026-06-01):
+     Gentleman's Gray (Benjamin Moore 2062-20) · Pheasant (Pantone 16-1332 TCX)
+     · Cloud Cream (Pantone 11-0606 TCX). 2 grounds + 1 accent. */
+  --night: #283a40;        /* Gentleman's Gray — dark ground */
+  --night-soft: #34474d;
+  --oat: #eae0cc;          /* Cloud Cream — light ground */
+  --oat-deep: #ddd2bb;
+  --brass: #c49a6b;        /* Pheasant — accent */
+  --brass-ink: #6a5230;    /* darkened Pheasant for AA small text on cream */
+
+  /* Typeface matched to the DUNE logo — a bold high-contrast bracketed serif
+     (Scotch/Didone family: thin stems, thick diagonals, fine bracketed serifs).
+     Playfair Display is the closest free match; used site-wide. Normal case.
+     Space Mono kept for numerals. */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  --ease-house: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --maxw: 1400px;
+  --pad: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* clip (not hidden) so transient reveal transforms never add an h-scrollbar */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--oat);
+  color: var(--night);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img { display: block; max-width: 100%; }
+
+::selection { background: var(--brass); color: var(--oat); }
+
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+/* ---- Type helpers --------------------------------------------------------- */
+.wordmark { font-weight: 600; letter-spacing: -0.045em; line-height: 0.92; }
+
+/* fancygroceries-style label — uppercase sans, 500, wide tracking */
+.kicker {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+/* Space Mono micro-label — reserved for specs / numerals (S6 connective) */
+.mono { font-family: var(--font-mono); }
+
+.measure { max-width: 42ch; }
+.italic { font-style: italic; }
+
+/* ---- Ground bands --------------------------------------------------------- */
+/* Contain off-screen reveal transforms (data-reveal left/right = ±8vw) so they
+   never widen the document — full-bleed grids would otherwise overflow. */
+main > section, main > header { overflow-x: clip; }
+.band { padding: clamp(4.5rem, 11vw, 9rem) var(--pad); }
+.band--oat { background: var(--oat); color: var(--night); }
+.band--night { background: var(--night); color: var(--oat); }
+.band--oat-deep { background: var(--oat-deep); color: var(--night); }
+.inner { max-width: var(--maxw); margin-inline: auto; }
+.inner--narrow { max-width: 1100px; margin-inline: auto; }
+
+.brass { color: var(--brass); }
+.brass-ink { color: var(--brass-ink); }
+.text-night-70 { color: color-mix(in srgb, var(--night) 85%, transparent); }
+.text-oat-75 { color: color-mix(in srgb, var(--oat) 75%, transparent); }
+
+/* ---- Filled-pill buttons (fancygroceries language) ------------------------ */
+.btn {
+  display: inline-block;
+  border-radius: 1.875rem;
+  padding: 0.85rem 1.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--ease-house) 0.4s, color var(--ease-house) 0.4s,
+    border-color var(--ease-house) 0.4s;
+}
+/* On oat ground: filled night */
+.btn--night { background: var(--night); color: var(--oat); }
+.btn--night:hover { background: var(--brass-ink); color: var(--oat); }
+/* On night ground: filled brass (brass/night = 6.0:1 — AA) */
+.btn--brass { background: var(--brass); color: var(--night); }
+.btn--brass:hover { background: var(--oat); color: var(--night); }
+/* Outline-on-night, fills oat on hover */
+.btn--ghost-oat {
+  background: transparent; color: var(--oat); border-color: color-mix(in srgb, var(--oat) 45%, transparent);
+}
+.btn--ghost-oat:hover { background: var(--oat); color: var(--night); }
+
+/* ---- Nav ------------------------------------------------------------------ */
+.nav {
+  position: fixed; inset-inline: 0; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0 1rem; padding: 1rem var(--pad);
+  background: transparent; color: var(--oat);
+  transition: background var(--ease-house) 0.5s, color var(--ease-house) 0.5s;
+}
+.nav.is-solid, .nav.is-open { background: var(--night); color: var(--oat); }
+.nav__brand { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: -0.03em; display: inline-flex; align-items: center; }
+/* Logo PNG is dark navy on transparent; chrome grounds are dark → render light */
+.nav__logo { height: 1.4rem; width: auto; display: block; filter: brightness(0) invert(1); }
+.foot__logo { height: 2.6rem; width: auto; display: block; filter: brightness(0) invert(1); }
+/* Tabs replaced by a hamburger on every viewport */
+.nav__links { display: none; }
+
+.nav__burger {
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  width: 30px; height: 26px; padding: 0; background: none; border: 0;
+  color: inherit; cursor: pointer;
+}
+.nav__burger span {
+  display: block; width: 100%; height: 2px; background: currentColor;
+  transition: transform var(--ease-house) 0.4s, opacity var(--ease-house) 0.3s;
+}
+.nav.is-open .nav__burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
+.nav.is-open .nav__burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.nav__mobile {
+  display: block; width: 100%; overflow: hidden; max-height: 0;
+  background: var(--night); color: var(--oat);
+  transition: max-height var(--ease-house) 0.5s;
+}
+.nav__mobile ul { padding-top: 0.5rem; }
+.nav.is-open .nav__mobile { max-height: 34rem; }
+.nav__mobile ul { list-style: none; margin: 0; padding: 0 var(--pad) 1.5rem; }
+.nav__mobile a {
+  display: block; padding: 1rem 0; font-family: var(--font-display); font-size: 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--oat) 15%, transparent);
+}
+.nav__mobile li:last-child a { border-bottom: 0; }
+.nav__mobile a[aria-current="page"] { color: var(--brass); }
+
+/* ---- Hero slideshow (anchor — full-bleed photo slideshow + statement) ----- */
+.hero {
+  position: relative; height: 100svh; min-height: 560px;
+  overflow: hidden; background: var(--night);
+}
+.hero__slides { position: absolute; inset: 0; }
+.hero__slide {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 1.6s var(--ease-house);
+}
+.hero__slide.is-active { opacity: 1; }
+.hero__slide img { width: 100%; height: 100%; object-fit: cover; }
+.hero__veil { position: absolute; inset: 0; background: var(--night); opacity: 0.4; }
+.hero__inner {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; color: var(--oat); padding: 0 var(--pad);
+}
+.hero__place { margin-bottom: 1.75rem; color: color-mix(in srgb, var(--oat) 75%, transparent); }
+.hero__word { font-size: clamp(4.5rem, 17vw, 11rem); }
+.hero__tag {
+  margin-top: 1.75rem; max-width: 28ch; font-family: var(--font-display);
+  font-style: italic; font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: color-mix(in srgb, var(--oat) 82%, transparent);
+}
+.hero__credit {
+  position: absolute; bottom: 0.75rem; left: var(--pad); z-index: 3;
+  font-size: 0.55rem; color: color-mix(in srgb, var(--oat) 65%, transparent);
+}
+.hero__cue {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  z-index: 3; text-align: center; color: color-mix(in srgb, var(--oat) 80%, transparent);
+}
+.hero__cue .line {
+  display: block; width: 1px; height: 2.5rem; margin: 0.5rem auto 0;
+  background: color-mix(in srgb, var(--oat) 50%, transparent);
+  transform-origin: top; animation: cue 2.6s var(--ease-house) infinite;
+}
+@keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.3; } 50% { transform: scaleY(1); opacity: 1; } }
+
+/* ---- Page header (interior pages) ---------------------------------------- */
+.pagehead { padding: clamp(8rem, 16vh, 11rem) var(--pad) clamp(4rem, 8vw, 7rem); }
+.pagehead h1 { max-width: 18ch; font-size: clamp(2.6rem, 7vw, 4rem); line-height: 1.06; margin-top: 1.25rem; }
+.pagehead p { margin-top: 1.75rem; }
+
+/* ---- Section heads -------------------------------------------------------- */
+.shead { display: flex; flex-direction: column; gap: 1.25rem; }
+.shead h2 { font-size: clamp(2rem, 5vw, 3rem); margin-top: 0.5rem; }
+@media (min-width: 768px) {
+  .shead { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+}
+.lead { font-size: clamp(1.3rem, 3vw, 2.1rem); line-height: 1.18; max-width: 24ch; }
+
+/* ---- Collections collage (offset rows) ----------------------------------- */
+.collage { margin-top: clamp(2.5rem, 6vw, 4rem); display: grid; gap: 2rem 2.5rem; }
+@media (min-width: 768px) { .collage { grid-template-columns: 1fr 1fr; gap: 4rem 2.5rem; } }
+.collage > *:nth-child(even) { } /* offset applied below */
+@media (min-width: 768px) { .collage .offset { margin-top: 6rem; } }
+.coll-card { display: block; }
+.coll-card .frame { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+.coll-card .frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.1s var(--ease-house);
+}
+.coll-card:hover .frame img { transform: scale(1.05); }
+.coll-card .row {
+  margin-top: 1.25rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+}
+.coll-card h3 { font-size: clamp(1.7rem, 4vw, 2.25rem); }
+.coll-card .go { transition: transform 0.5s var(--ease-house); }
+.coll-card:hover .go { transform: translateX(4px); }
+.coll-card .blurb { margin-top: 0.75rem; max-width: 42ch; }
+
+/* ---- Highlights (alternating full plates) -------------------------------- */
+.plate {
+  max-width: var(--maxw); margin-inline: auto;
+  display: grid; gap: 2rem; align-items: center;
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+@media (min-width: 768px) { .plate { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+.plate .frame { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+.plate .frame img { width: 100%; height: 100%; object-fit: cover; }
+.plate.flip .media { order: 2; }
+.plate h3 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-top: 1rem; }
+.plate p { margin-top: 1.5rem; }
+@media (max-width: 767px) { .plate.flip .media { order: 0; } }
+
+/* ---- Brand marquee -------------------------------------------------------- */
+.brands { overflow: hidden; }
+.brand-rows { display: flex; flex-direction: column; gap: 1.25rem; margin-top: clamp(2.5rem, 6vw, 4rem); }
+.brand-row__name {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: -0.02em; padding-inline: 1rem;
+  transition: color 0.3s;
+}
+.brands .ms-marquee__track > span { display: inline-flex; align-items: center; }
+.dia { color: color-mix(in srgb, var(--brass) 70%, transparent); }
+
+/* ---- Packing list (wildcard) --------------------------------------------- */
+.packing { display: grid; gap: 3rem; }
+@media (min-width: 768px) { .packing { grid-template-columns: 1fr 1.1fr; gap: 5rem; } }
+.packing__list { list-style: none; margin: 0; padding: 0; }
+.packing__list li {
+  display: grid; grid-template-columns: auto 1fr; gap: 0 1.5rem; align-items: baseline;
+  padding: 1.25rem 0; border-top: 1px solid color-mix(in srgb, var(--oat) 12%, transparent);
+}
+.packing__list li:first-child { border-top: 0; }
+.packing__no { font-family: var(--font-mono); font-size: 0.9rem; color: var(--brass); }
+.packing__item { font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 1.9rem); }
+.packing__note { margin-top: 0.25rem; color: color-mix(in srgb, var(--oat) 60%, transparent); }
+.mantra { font-family: var(--font-display); font-style: italic; font-size: clamp(1.5rem, 4vw, 1.9rem); line-height: 1.3; margin-top: 2rem; color: color-mix(in srgb, var(--oat) 85%, transparent); }
+
+/* ---- Pull-quote carousel (fancygroceries motion technique) ---------------- */
+.quotes { text-align: center; }
+.quotes__stage { position: relative; min-height: 9rem; margin-top: 1rem; }
+.quote {
+  position: absolute; inset: 0; opacity: 0; transform: translateY(12px);
+  transition: opacity 0.8s var(--ease-house), transform 0.8s var(--ease-house);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.quote.is-active { opacity: 1; transform: none; position: relative; }
+.quote blockquote {
+  margin: 0; font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.6rem, 4.5vw, 3rem); line-height: 1.18; max-width: 22ch;
+}
+.quote cite { margin-top: 1.5rem; font-style: normal; }
+.quotes__dots { display: flex; gap: 0.25rem; justify-content: center; margin-top: 2.5rem; }
+/* 24×24 hit area (a11y target-size) with a small centred dot */
+.quotes__dots button {
+  width: 24px; height: 24px; border: 0; padding: 0; cursor: pointer;
+  background: transparent; display: grid; place-items: center;
+}
+.quotes__dots button::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: color-mix(in srgb, var(--brass-ink) 35%, transparent); transition: background 0.3s;
+}
+.quotes__dots button[aria-pressed="true"]::before { background: var(--brass-ink); }
+
+/* ---- Journal -------------------------------------------------------------- */
+.cards { margin-top: clamp(2.5rem, 6vw, 4rem); display: grid; gap: 2rem 2rem; }
+@media (min-width: 768px) { .cards { grid-template-columns: repeat(3, 1fr); gap: 3.5rem 2rem; } }
+.card .frame { position: relative; aspect-ratio: 5/6; overflow: hidden; }
+.card .frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease-house); }
+.card:hover .frame img { transform: scale(1.04); }
+.card h3 { font-size: clamp(1.6rem, 3.5vw, 1.9rem); margin-top: 0.75rem; }
+.card .meta { margin-top: 1.25rem; }
+.card p { margin-top: 0.75rem; max-width: 42ch; }
+
+/* ---- Instagram grid ------------------------------------------------------- */
+.iggrid { margin-top: clamp(2.5rem, 6vw, 3.5rem); display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (min-width: 768px) { .iggrid { grid-template-columns: repeat(4, 1fr); } }
+/* No fixed crop box — each photo renders at its full natural size (whole image
+   visible, sized to the column). Square IG crops stay a tidy grid. */
+.igtile { position: relative; overflow: hidden; display: block; line-height: 0; }
+.igtile img { width: 100%; height: auto; display: block; transition: transform 0.9s var(--ease-house); }
+.igtile:hover img { transform: scale(1.03); }
+/* Persistent Instagram glyph so every tile reads as an Instagram post */
+.igtile::after {
+  content: ""; position: absolute; top: 0.55rem; right: 0.55rem; z-index: 2;
+  width: 1.4rem; height: 1.4rem; pointer-events: none; opacity: 0.95;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><rect x='2.5' y='2.5' width='19' height='19' rx='5'/><circle cx='12' cy='12' r='4.5'/><circle cx='17.6' cy='6.4' r='1.1' fill='%23fff' stroke='none'/></svg>") center / contain no-repeat;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+}
+.igtile .cap {
+  position: absolute; inset-inline: 0; bottom: 0; padding: 0.75rem; z-index: 1;
+  font-size: 0.6rem; color: var(--oat); opacity: 0; transition: opacity 0.5s;
+  background: linear-gradient(to top, color-mix(in srgb, var(--night) 80%, transparent), transparent);
+}
+.igtile:hover .cap { opacity: 1; }
+.note { margin-top: 1.5rem; font-size: 0.85rem; color: color-mix(in srgb, var(--night) 85%, transparent); }
+/* Inline links need a non-color cue (a11y: link-in-text-block) */
+.note a { text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* ---- Visit / hours -------------------------------------------------------- */
+.visit { display: grid; gap: 0; align-items: stretch; max-width: var(--maxw); margin-inline: auto; }
+@media (min-width: 768px) { .visit { grid-template-columns: 1fr 1fr; } }
+.visit__media { position: relative; min-height: 60vh; overflow: hidden; }
+.visit__media img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.visit__body { display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem, 7vw, 5rem) var(--pad); }
+.visit__body h2 { font-size: clamp(2rem, 5vw, 3rem); margin-top: 1rem; }
+.dl { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 480px) { .dl { grid-template-columns: 1fr 1fr; } }
+.dl dt { margin: 0; }
+.dl dd { margin: 0.5rem 0 0; }
+.dl a:hover { color: var(--brass); }
+
+/* ---- Location (stylized "etched" map placeholder + Apple Maps) ------------ */
+.locmap {
+  position: relative; min-height: 58vh; overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--oat) 9%, transparent) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--oat) 9%, transparent) 0 1px, transparent 1px 46px),
+    radial-gradient(120% 90% at 50% 30%, var(--night-soft), var(--night));
+}
+.locmap__pin { position: absolute; top: 46%; left: 50%; transform: translate(-50%, -100%); text-align: center; }
+.locmap__dot {
+  width: 14px; height: 14px; border-radius: 50%; margin: 0 auto; background: var(--brass);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--brass) 28%, transparent);
+}
+.locmap__label { margin-top: 0.7rem; color: var(--oat); }
+
+/* ---- Footer --------------------------------------------------------------- */
+.foot { background: var(--night); color: var(--oat); }
+.foot__marquee {
+  border-block: 1px solid color-mix(in srgb, var(--oat) 10%, transparent);
+  padding-block: 1.5rem; overflow: hidden;
+}
+.foot__marquee .big {
+  font-family: var(--font-display); font-size: clamp(2.5rem, 9vw, 5rem);
+  letter-spacing: -0.02em; color: color-mix(in srgb, var(--oat) 58%, transparent);
+}
+.foot__grid {
+  max-width: var(--maxw); margin-inline: auto; display: grid; gap: 3rem;
+  padding: clamp(3rem, 7vw, 4rem) var(--pad);
+}
+@media (min-width: 768px) { .foot__grid { grid-template-columns: 1.5fr 1fr 1fr; } }
+.foot h2 { font-size: clamp(2rem, 5vw, 2.5rem); }
+.foot ul { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+.foot a { opacity: 0.82; }
+.foot a:hover { opacity: 1; }
+.foot address { font-style: normal; display: grid; gap: 0.5rem; margin-top: 0.5rem; opacity: 0.82; }
+.foot__base {
+  max-width: var(--maxw); margin-inline: auto;
+  display: flex; flex-direction: column; gap: 0.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--oat) 10%, transparent);
+  padding: 1.5rem var(--pad); color: color-mix(in srgb, var(--oat) 70%, transparent);
+}
+@media (min-width: 768px) { .foot__base { flex-direction: row; justify-content: space-between; } }
+
+/* ---- Utility -------------------------------------------------------------- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.mt-cta { margin-top: clamp(2rem, 5vw, 2.75rem); display: flex; flex-wrap: wrap; gap: 1rem; }
+.center { text-align: center; }
+
+/* ---- Staggered reveals ----------------------------------------------------
+   motion.js animates the CHILDREN of a [data-reveal][data-reveal-stagger]
+   container (not the container). motion.css's [data-reveal]{opacity:0} would
+   otherwise hide the whole block, so keep the container shown and stage the
+   children instead. */
+[data-reveal][data-reveal-stagger] { opacity: 1 !important; transform: none !important; }
+[data-reveal][data-reveal-stagger] > * {
+  opacity: 0; transform: translateY(40px); will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal][data-reveal-stagger] > * { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---- About page grids ----------------------------------------------------- */
+@media (min-width: 768px) {
+  .about-grid { grid-template-columns: 1.2fr 1fr !important; gap: 5rem !important; align-items: start; }
+  .room-grid { grid-template-columns: 1.6fr 1fr !important; gap: 2.5rem !important; }
+}
+
+/* Reduced motion — show hero/quote statics, kill the cue */
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide { transition: none; }
+  .hero__cue .line { animation: none; }
+  .quote { transition: none; }
+}

@@ -1,0 +1,81 @@
+/* =========================================================================
+   MOTION-STARTER — motion.css
+   House motion primitives derived from papertiger.com / fancygroceries.com.
+   Pure presentation + the pre-animation "hidden" states. All JS lives in
+   motion.js. Everything degrades to fully-visible under prefers-reduced-motion.
+   ========================================================================= */
+
+:root {
+  /* House easing — same family as papertiger's power-out/expo */
+  --ease-house: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 0.3s;
+  --dur-mid: 0.6s;
+  --dur-slow: 1.2s;
+}
+
+/* Lenis smooth-scroll plumbing -------------------------------------------- */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+/* Hide native scrollbar only while Lenis owns the scroll (papertiger pattern) */
+html.lenis { scrollbar-width: none; }
+html.lenis::-webkit-scrollbar { display: none; }
+
+/* 1. FADE TEXT (SplitText char/line mask) --------------------------------
+   JS wraps each line in .line and each line in an overflow:hidden mask, then
+   rises the inner content. We pre-hide so there is no flash before JS runs. */
+[data-split] { visibility: hidden; }            /* revealed by JS once split  */
+.split-line-mask { overflow: hidden; display: block; }
+.split-line { display: block; will-change: transform; }
+
+/* 2. SLIDE-IN FROM LEFT / RIGHT ------------------------------------------- */
+[data-reveal] { opacity: 0; will-change: transform, opacity; }
+[data-reveal="left"]  { transform: translateX(-8vw); }
+[data-reveal="right"] { transform: translateX(8vw); }
+[data-reveal="up"]    { transform: translateY(60px); }
+
+/* 3. SCROLL ZOOM / SCALE -------------------------------------------------- */
+[data-scale] { will-change: transform; }
+[data-scale] > img,
+[data-scale] > .ms-img { transform-origin: center; will-change: transform; }
+
+/* 4. HOVER SCALE (image crop) -------------------------------------------- */
+.ms-hover { overflow: hidden; }
+.ms-hover > img,
+.ms-hover > .ms-img {
+  transition: transform 0.8s var(--ease-house);
+}
+.ms-hover:hover > img,
+.ms-hover:hover > .ms-img { transform: scale(1.06); }
+
+/* Line-draw divider ------------------------------------------------------- */
+[data-line] {
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Marquee ----------------------------------------------------------------- */
+.ms-marquee { overflow: hidden; white-space: nowrap; }
+.ms-marquee__track { display: inline-flex; will-change: transform; }
+.ms-marquee__track > * { padding-inline: 1.5rem; }
+
+/* Counter ----------------------------------------------------------------- */
+[data-count] { font-variant-numeric: tabular-nums; }
+
+/* =========================================================================
+   REDUCED MOTION — disable everything, show content statically.
+   Mirrors playbook rule: reduced-motion shows all content with no transforms.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  [data-split] { visibility: visible !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  [data-scale] > img, [data-scale] > .ms-img { transform: none !important; }
+  [data-line] { transform: scaleX(1) !important; }
+  .ms-hover > img, .ms-hover > .ms-img { transition: none !important; }
+  .ms-marquee__track { transform: none !important; }
+  html.lenis { scrollbar-width: auto; }
+  html.lenis::-webkit-scrollbar { display: initial; }
+}
