@@ -85,6 +85,12 @@ landing hero's first slide — **user-supplied; it replaced the dusk Gazette sho
 credit** (the owner `storefront.jpg` now carries the visit placements, creditless).
 The home "Island" highlight plate uses `entrance.jpg` (per user request) instead
 of `surfboard.jpg`; the journal "island uniform" card still uses `surfboard.jpg`.
+`map.jpg` (static Google Maps screenshot, real Dune pin at 9 Winter St, ~174 KB)
+fills the location section on `index.html` + `visit.html`, linked to live Google
+Maps — it **replaced the hand-illustrated street-map SVG** (2026-06-02, client
+request). Static image by design, **not a live Maps iframe**: an embed sets
+third-party cookies and drops Lighthouse Best-Practices to ~77 (see playbook S9).
+The old `.streetmap` SVG CSS is now dead but harmless.
 The landing hero is **photo-only** — the "Dune" wordmark, "Edgartown · Martha's
 Vineyard" kicker, and "An island wardrobe, curated" tagline were removed (user:
 "I only want people to look at the photos"); the dark veil was dropped too. The

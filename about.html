@@ -21,22 +21,20 @@
 <nav class="nav" id="nav">
   <a class="nav__brand" href="index.html" aria-label="Dune — home"><img class="nav__logo" src="images/dune-logo.png" alt="Dune" width="330" height="110" /></a>
   <ul class="nav__links">
-    <li><a class="nav__link" href="shop.html">Shop</a></li>
+    <li><a class="nav__link" href="https://dunemv.com" target="_blank" rel="noopener noreferrer">Shop</a></li>
     <li><a class="nav__link" href="about.html" aria-current="page">About</a></li>
     <li><a class="nav__link" href="visit.html">Visit</a></li>
-    <li><a class="nav__link" href="index.html#brands">Brands</a></li>
+    <li><a class="nav__link" href="brands.html">Brands</a></li>
     <li><a class="nav__link" href="journal.html">Journal</a></li>
-    <li><a class="nav__link" href="terms.html">Terms</a></li>
   </ul>
   <button class="nav__burger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
   <div class="nav__mobile" id="mobile-nav">
     <ul>
-      <li><a href="shop.html">Shop</a></li>
+      <li><a href="https://dunemv.com" target="_blank" rel="noopener noreferrer">Shop</a></li>
       <li><a href="about.html" aria-current="page">About</a></li>
       <li><a href="visit.html">Visit</a></li>
-      <li><a href="index.html#brands">Brands</a></li>
+      <li><a href="brands.html">Brands</a></li>
       <li><a href="journal.html">Journal</a></li>
-      <li><a href="terms.html">Terms</a></li>
     </ul>
   </div>
 </nav>
@@ -55,7 +53,7 @@
     <div class="inner" style="display:grid;gap:3rem;align-items:start">
       <div style="display:grid;gap:3rem;grid-template-columns:1fr" class="about-grid">
         <div data-reveal="up" style="display:flex;flex-direction:column;gap:1.5rem">
-          <p class="font-display" style="font-family:var(--font-display);font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.25">
+          <p class="font-display" style="font-family:var(--font-display);font-size:clamp(1.2rem,2.4vw,1.6rem);line-height:1.25">
             Dune opened on Winter Street in April 2024 with a simple promise: a man
             should be able to arrive on the island with nothing and leave the shop
             with everything he actually needs.
@@ -89,9 +87,26 @@
   <!-- The room + pull quote -->
   <section class="band band--oat" aria-labelledby="room-h">
     <div class="inner">
-      <div class="center" data-reveal="up" style="max-width:48rem;margin-inline:auto">
-        <blockquote style="margin:0;font-family:var(--font-display);font-style:italic;font-size:clamp(1.8rem,5vw,3rem);line-height:1.18">“At Dune, it's a man's world.”</blockquote>
-        <p class="kicker brass-ink" style="margin-top:1.5rem">Vineyard Gazette · Noah Glasgow · June 2024</p>
+      <div class="quotes" data-reveal="up" style="max-width:48rem;margin-inline:auto">
+        <div class="quotes__stage">
+          <figure class="quote is-active">
+            <blockquote>“At Dune, it's a man's world.”</blockquote>
+            <cite class="kicker brass-ink">Vineyard Gazette · Noah Glasgow · June 2024</cite>
+          </figure>
+          <figure class="quote">
+            <blockquote>“Lose the suitcase. Rebuild the wardrobe.”</blockquote>
+            <cite class="kicker brass-ink">The Dune brief</cite>
+          </figure>
+          <figure class="quote">
+            <blockquote>“A men's shop with a point of view — not a catalog.”</blockquote>
+            <cite class="kicker brass-ink">Dune · Edgartown</cite>
+          </figure>
+        </div>
+        <div class="quotes__dots">
+          <button type="button" aria-pressed="true" aria-label="Show quote 1"></button>
+          <button type="button" aria-pressed="false" aria-label="Show quote 2"></button>
+          <button type="button" aria-pressed="false" aria-label="Show quote 3"></button>
+        </div>
       </div>
 
       <div style="margin-top:clamp(2.5rem,6vw,4rem);display:grid;gap:2rem" class="room-grid">
@@ -100,7 +115,7 @@
         </div>
         <div data-reveal="right" style="display:flex;flex-direction:column;justify-content:center">
           <p class="kicker brass-ink">The Room</p>
-          <h2 id="room-h" style="font-size:clamp(1.8rem,4vw,2.5rem);margin-top:0.75rem">Masculine, but flamboyant</h2>
+          <h2 id="room-h" style="font-size:clamp(1.4rem,2.8vw,1.9rem);margin-top:0.75rem">Masculine, but flamboyant</h2>
           <p class="measure text-night-70" style="margin-top:1.25rem">Two floors on Winter Street: a lower level painted a deep navy, a stairwell lined with vintage concert posters and photographs, and a shark arcing over the doorway. It was renovated to feel like a study you could shop — a room with opinions.</p>
           <p class="kicker brass-ink" style="margin-top:1rem;font-size:0.55rem">Photo · Vineyard Gazette · Ray Ewing</p>
         </div>
@@ -111,10 +126,10 @@
   <!-- CTA -->
   <section class="band band--night center" aria-label="Visit Dune">
     <div class="inner--narrow" data-reveal="up">
-      <h2 style="font-size:clamp(2rem,5vw,3rem)">The door is on the corner. The shark is over it.</h2>
+      <h2 style="font-size:clamp(1.5rem,3.2vw,2.2rem)">The door is on the corner. The shark is over it.</h2>
       <div class="mt-cta" style="justify-content:center">
         <a class="btn btn--brass" href="visit.html">Plan a visit</a>
-        <a class="btn btn--ghost-oat" href="shop.html">See what we carry</a>
+        <a class="btn btn--ghost-oat" href="brands.html">See what we carry</a>
       </div>
     </div>
   </section>
@@ -122,25 +137,43 @@
 </main>
 
 <footer class="foot">
-  <div class="foot__marquee ms-marquee" aria-hidden="true">
-    <div class="ms-marquee__track big" data-speed="40" data-dir="-1">
-      <span>41.3897&deg; N&nbsp;·&nbsp;70.5128&deg; W&nbsp;·&nbsp;</span>
+  <div class="foot__terms">
+    <div class="inner">
+      <p class="kicker brass">Terms &amp; Store Policies</p>
+      <div class="foot__terms-grid">
+        <div>
+          <h3>Returns &amp; exchanges</h3>
+          <p>[COPY TO CONFIRM] — return window, condition, and process.</p>
+        </div>
+        <div>
+          <h3>Shipping</h3>
+          <p>[COPY TO CONFIRM] — domestic / international shipping and timing.</p>
+        </div>
+        <div>
+          <h3>Privacy</h3>
+          <p>[COPY TO CONFIRM] — how customer information is handled.</p>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p>Dune / Man · 9 Winter Street, #5100, Edgartown, MA 02539 · <a href="mailto:info@dunemv.com">info@dunemv.com</a> · <a href="tel:7745499304">774.549.9304</a></p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="foot__grid">
     <div>
       <p class="wordmark"><img class="foot__logo" src="images/dune-logo.png" alt="Dune" width="330" height="110" /></p>
       <p class="text-oat-75 measure" style="margin-top:1rem">Dressing for doing less.</p>
+      <p class="foot__coords kicker">41.3897&deg; N · 70.5128&deg; W</p>
     </div>
     <nav aria-label="Footer">
       <p class="kicker brass">Pages</p>
       <ul>
-        <li><a href="shop.html">Shop</a></li>
+        <li><a href="https://dunemv.com" target="_blank" rel="noopener noreferrer">Shop</a></li>
         <li><a href="about.html" aria-current="page">About</a></li>
         <li><a href="visit.html">Visit</a></li>
-        <li><a href="index.html#brands">Brands</a></li>
+        <li><a href="brands.html">Brands</a></li>
         <li><a href="journal.html">Journal</a></li>
-        <li><a href="terms.html">Terms</a></li>
       </ul>
     </nav>
     <div>
@@ -155,7 +188,6 @@
   </div>
   <div class="foot__base">
     <p class="kicker" style="font-size:0.6rem">© <span id="yr">2026</span> Dune / Man. Edgartown, Massachusetts.</p>
-    <p class="kicker" style="font-size:0.6rem">41.3897&deg; N · 70.5128&deg; W</p>
   </div>
 </footer>
 
