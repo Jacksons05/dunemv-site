@@ -43,7 +43,7 @@ public_folder: "/images/uploads"
 # site, not the store.
 site_url: https://dune-mv.netlify.app
 display_url: https://dune-mv.netlify.app
-logo_url: https://dune-mv.netlify.app/images/dune-logo.png
+logo_url: https://dune-mv.netlify.app/images/islandmark-logo.png
 
 # A friendly note shown at the top of the editor.
 # (Decap shows collection descriptions inline.)
