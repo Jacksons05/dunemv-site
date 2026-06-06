@@ -54,7 +54,7 @@ collections:
     label: "Site Text & Contact"
     description: "The words and contact details that appear across the site."
     editor:
-      preview: false
+      preview: true
     files:
       - name: "general"
         label: "Contact & Business Info"
