@@ -1,0 +1,25 @@
+{
+  "ethos_kicker": "The Dune Ethos",
+  "ethos_statement": "Dressing for doing less.",
+  "ethos_paragraphs": [
+    { "text": "Life on the island has a way of simplifying things." },
+    { "text": "The days are slower, the schedule is lighter, and getting dressed should be just as easy. We've curated a collection of effortless essentials designed for warm weather, coastal living, and everything that comes with both." },
+    { "text": "These are the pieces you'll wear here—and pack for everywhere else." }
+  ],
+  "essentials_kicker": "The Essentials",
+  "essentials_heading": "Pack one bag.",
+  "essentials_intro": "Everything you need for looking great on your Vineyard getaway — and nothing you don't.",
+  "packing_list": [
+    { "item": "Knitwear", "note": "Fine-gauge polos and sweaters for porch light and salt air." },
+    { "item": "Linens", "note": "Breathable shirting for the heat off the harbor." },
+    { "item": "Easy Pants", "note": "Pull-on ease, beach to dinner." },
+    { "item": "Trousers", "note": "Crease-shy and sand-ready, smart enough." },
+    { "item": "Loafers", "note": "For brick sidewalks and boat decks alike." },
+    { "item": "Sneakers", "note": "Light on the foot, all day." },
+    { "item": "Sandals", "note": "For the short walk to the water." },
+    { "item": "Jewelry", "note": "The small finishing things, kept under glass." },
+    { "item": "Eyewear", "note": "Pulled from the cabinet for the glare." }
+  ],
+  "location_heading": "Find us off Main.",
+  "location_text": "Dune / Man — a shingled corner on Winter Street, Edgartown, just off Main Street."
+}

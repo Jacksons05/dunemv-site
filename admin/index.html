@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Islandmark · Dune Content Editor</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2315243a'/><text x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23e8dcc8' text-anchor='middle'>I</text></svg>" />
+
+  <!-- ───────────── Islandmark brand styling for the login + chrome ─────────────
+       Brand tokens: Ink #15243a · Sand #e8dcc8 · Mist #f5f2ec · Fog #8a9aae
+       Fonts: Playfair Display (display) + Inter (UI)                               -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --im-ink:  #15243a;
+      --im-sand: #e8dcc8;
+      --im-mist: #f5f2ec;
+      --im-fog:  #8a9aae;
+    }
+    [class*="Login"], [class^="Login"] {
+      background: var(--im-ink) !important;
+    }
+    body::before {
+      content: "ISLANDMARK";
+      position: fixed;
+      top: 38px; left: 0; right: 0;
+      text-align: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px; letter-spacing: 0.18em;
+      color: var(--im-sand);
+      z-index: 10000;
+      pointer-events: none;
+    }
+    body::after {
+      content: "Dune · Content Editor";
+      position: fixed;
+      top: 78px; left: 0; right: 0;
+      text-align: center;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--im-fog);
+      z-index: 10000;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+
+  <script>
+    (function () {
+      function hideMasthead() {
+        var app = document.querySelector('[class*="AppMainContainer"], [class*="AppHeader"]');
+        if (app) {
+          var s = document.createElement('style');
+          s.textContent = 'body::before,body::after{display:none!important}';
+          document.head.appendChild(s);
+          return true;
+        }
+        return false;
+      }
+      var t = setInterval(function () { if (hideMasthead()) clearInterval(t); }, 400);
+      setTimeout(function () { clearInterval(t); }, 20000);
+    })();
+  </script>
+</body>
+</html>

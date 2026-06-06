@@ -1,0 +1,24 @@
+# Dune — Netlify build settings (Islandmark CMS)
+# On each deploy, Netlify runs build.js (regenerates editable regions from
+# /content, and adds a noindex header on non-production deploys) and publishes
+# the site root. build.js has zero dependencies — no npm install needed.
+#
+# Branch model (set Production branch = main in Netlify > Site config > Build):
+#   main     -> PRODUCTION   (dunemv.com)
+#   staging  -> PREVIEW      (staging.dunemv.com — enable as a Branch deploy)
+#   PR/cms-* -> DEPLOY PREVIEW (automatic unique URL per pending CMS edit)
+
+[build]
+  command = "node build.js"
+  publish = "."
+
+# Same build runs in every context; build.js reads $CONTEXT to decide whether to
+# emit the noindex header (production = indexable, everything else = noindex).
+[context.production]
+  command = "node build.js"
+
+[context.branch-deploy]
+  command = "node build.js"
+
+[context.deploy-preview]
+  command = "node build.js"

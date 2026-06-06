@@ -1,0 +1,20 @@
+{
+  "hero_slides": [
+    { "image": "/images/Storefront.jpeg", "alt": "Dune's shingled corner storefront on Winter Street, Edgartown — green awnings, a hanging DUNE sign, and mannequins in the corner window." },
+    { "image": "/images/floor.jpg", "alt": "Dune's main sales floor under a pitched ceiling — a brass chandelier, racks of trousers and shirts, a central knit table, and a mounted fish on the navy wall." },
+    { "image": "/images/wall.jpg", "alt": "A converted-fireplace shoe wall set in brick — rows of sneakers and loafers, a rail of caps above, and a whale-tail sculpture on the stair landing." },
+    { "image": "/images/entrance.jpg", "alt": "An overhead view of Dune's entrance — a wood surfboard mounted high, track lighting, clothing racks, and a DUNE doormat at the glass door." }
+  ],
+  "collage": [
+    { "image": "/images/fine-knits.jpg", "alt": "A folded stack and rail of fine-gauge knit polos and sweaters on the shop floor.", "caption": "Fine-gauge knits" },
+    { "image": "/images/linen.jpg", "alt": "Pale linen shirting hung on a rail, light from the harbor side of the shop.", "caption": "Linen, for the heat off the harbor" },
+    { "image": "/images/footwear.jpg", "alt": "Loafers and sneakers lined along the shop's converted-fireplace shoe wall.", "caption": "Loafers & sneakers" },
+    { "image": "/images/cabinet.jpg", "alt": "The glass display cabinet — eyewear, watches, and small jewelry kept under glass.", "caption": "The small things, under glass" }
+  ],
+  "instagram": [
+    { "image": "/images/instagram/DVXzDf-Dj2F.jpg", "alt": "A navy Dune ball cap with a cream script D, worn above tortoiseshell sunglasses in golden light.", "caption": "Beach weather's coming.", "post_url": "https://www.instagram.com/p/DVXzDf-Dj2F/" },
+    { "image": "/images/instagram/DVZ-OcoETLy.jpg", "alt": "A man in a navy-and-cream striped sailor sweater crouched on a beach, sailboats moored offshore.", "caption": "The Sailor sweater, into port.", "post_url": "https://www.instagram.com/p/DVZ-OcoETLy/" },
+    { "image": "/images/instagram/DVTekgYgYOn.jpg", "alt": "A bearded man in a plaid flannel shirt beside sunlit coastal rocks and blue water.", "caption": "Portuguese Flannel, in shop.", "post_url": "https://www.instagram.com/p/DVTekgYgYOn/" },
+    { "image": "/images/instagram/DV1trEqkgoA.jpg", "alt": "A navy 'Dune Edg. Gentleman's Supply' hoodie pinned to a clothesline against a pale sky.", "caption": "Summer-weight fleece, made in Portugal.", "post_url": "https://www.instagram.com/p/DV1trEqkgoA/" }
+  ]
+}

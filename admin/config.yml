@@ -1,0 +1,173 @@
+# ───────────────────────────────────────────────────────────────────────────
+# Dune — Decap CMS configuration
+# The owner edits content here; every change becomes a draft for the agency to
+# review and publish (editorial workflow). The owner never has publish access.
+# ───────────────────────────────────────────────────────────────────────────
+
+# --- LOGIN / BACKEND --------------------------------------------------------
+# CHOSEN: DecapBridge (2026-06). The owner logs in by email — no GitHub account
+# needed. DecapBridge speaks the git-gateway protocol and handles auth for us.
+backend:
+  name: git-gateway
+  repo: Jacksons05/dunemv-site
+  branch: staging
+  identity_url: https://auth.decapbridge.com/sites/6c94949f-0ee2-446c-a315-b29c10e1c09a
+  gateway_url: https://gateway.decapbridge.com
+  # ^ DecapBridge generates this exact backend block for you — paste it over this
+  #   one (it fills in YOUR-SITE-ID). Just keep `branch: staging`.
+
+# ALTERNATIVE — GitHub backend (owner needs a GitHub account + an OAuth proxy):
+#   backend:
+#     name: github
+#     repo: Jacksons05/dunemv-site
+#     branch: staging
+#     # base_url: https://<your-oauth-proxy>
+
+# Editorial workflow = drafts. Owner saves -> "In review" -> agency approves &
+# publishes. This is the whole "send it to us to publish" mechanism.
+publish_mode: editorial_workflow
+
+# Local testing: run `npx decap-server` then open the served /admin/ — the editor
+# reads/writes the local files so you can try it before any deploy/auth is set up.
+# (Harmless in production; it only activates on localhost.)
+local_backend: true
+
+# Uploaded photos land here in the repo.
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# Where the MARKETING SITE itself lives — this is the Netlify address, NOT
+# dunemv.com (that's the Shopify store). Replace YOUR-NETLIFY-SITE with the real
+# name once the Netlify site exists (you can rename it in Netlify › Site settings).
+# These drive the editor's "View live" links — they must point at the marketing
+# site, not the store.
+site_url: https://YOUR-NETLIFY-SITE.netlify.app
+display_url: https://YOUR-NETLIFY-SITE.netlify.app
+logo_url: https://YOUR-NETLIFY-SITE.netlify.app/images/dune-logo.png
+
+# A friendly note shown at the top of the editor.
+# (Decap shows collection descriptions inline.)
+
+collections:
+  # ── SITE TEXT & CONTACT ──────────────────────────────────────────────────
+  - name: "settings"
+    label: "Site Text & Contact"
+    description: "The words and contact details that appear across the site."
+    editor:
+      preview: false
+    files:
+      - name: "general"
+        label: "Contact & Business Info"
+        file: "content/settings/general.json"
+        fields:
+          - { name: "business_name", label: "Business name", widget: "string" }
+          - { name: "tagline", label: "Tagline", widget: "string" }
+          - { name: "phone_display", label: "Phone (as shown)", widget: "string" }
+          - { name: "phone_link", label: "Phone (digits only, for tap-to-call)", widget: "string" }
+          - { name: "email", label: "Email", widget: "string" }
+          - { name: "address_line1", label: "Address line 1", widget: "string" }
+          - { name: "address_line2", label: "Address line 2", widget: "string" }
+          - { name: "shop_url", label: "Online shop URL", widget: "string" }
+          - { name: "instagram_handle", label: "Instagram handle", widget: "string" }
+          - { name: "instagram_url", label: "Instagram URL", widget: "string" }
+          - { name: "maps_url", label: "Google Maps URL", widget: "string", required: false }
+
+      - name: "home"
+        label: "Home Page Text"
+        file: "content/settings/home.json"
+        fields:
+          - { name: "ethos_kicker", label: "Ethos — small label", widget: "string" }
+          - { name: "ethos_statement", label: "Ethos — big statement", widget: "string" }
+          - name: "ethos_paragraphs"
+            label: "Ethos — paragraphs"
+            widget: "list"
+            fields:
+              - { name: "text", label: "Paragraph", widget: "text" }
+          - { name: "essentials_kicker", label: "Essentials — small label", widget: "string" }
+          - { name: "essentials_heading", label: "Essentials — heading", widget: "string" }
+          - { name: "essentials_intro", label: "Essentials — intro", widget: "text" }
+          - name: "packing_list"
+            label: "Packing list"
+            widget: "list"
+            fields:
+              - { name: "item", label: "Item", widget: "string" }
+              - { name: "note", label: "Note", widget: "string" }
+          - { name: "location_heading", label: "Location — heading", widget: "string" }
+          - { name: "location_text", label: "Location — text", widget: "text" }
+
+      - name: "policies"
+        label: "Store Policies (footer)"
+        file: "content/settings/policies.json"
+        fields:
+          - { name: "returns", label: "Returns & exchanges", widget: "text" }
+          - { name: "shipping", label: "Shipping", widget: "text" }
+          - { name: "privacy", label: "Privacy", widget: "text" }
+
+  # ── BRANDS ───────────────────────────────────────────────────────────────
+  - name: "brands"
+    label: "Brands"
+    description: "The brand list on the Brands page. Add, remove, or reorder by dragging."
+    files:
+      - name: "brand_list"
+        label: "Brand list"
+        file: "content/brands.json"
+        fields:
+          - name: "brands"
+            label: "Brands"
+            label_singular: "Brand"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.origin}}"
+            fields:
+              - { name: "name", label: "Brand name", widget: "string" }
+              - { name: "origin", label: "Origin / year", widget: "string" }
+              - { name: "note", label: "One-line note", widget: "string" }
+
+  # ── JOURNAL ──────────────────────────────────────────────────────────────
+  - name: "journal"
+    label: "Journal"
+    description: "Field notes and stories. Each entry is its own post."
+    folder: "content/journal"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{season}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "category", label: "Category", widget: "string", hint: "e.g. Field Note, The Room, Style" }
+      - { name: "season", label: "Season / date label", widget: "string", hint: "e.g. Summer 2024" }
+      - { name: "order", label: "Display order", widget: "number", value_type: "int", default: 1 }
+      - { name: "image", label: "Photo", widget: "image", required: false }
+      - { name: "image_alt", label: "Photo description (for accessibility)", widget: "string", required: false }
+      - { name: "dek", label: "Summary line", widget: "text" }
+      - { name: "body", label: "Full entry", widget: "markdown", required: false }
+
+  # ── PHOTOS (home page) ───────────────────────────────────────────────────
+  - name: "photos"
+    label: "Home Page Photos"
+    description: "Swap the storefront slideshow, the 'A Look Inside' collage, and the Instagram grid. Always fill in a photo description for accessibility."
+    files:
+      - name: "home_photos"
+        label: "Home photos"
+        file: "content/photos.json"
+        fields:
+          - name: "hero_slides"
+            label: "Storefront slideshow"
+            widget: "list"
+            fields:
+              - { name: "image", label: "Photo", widget: "image" }
+              - { name: "alt", label: "Photo description", widget: "string" }
+          - name: "collage"
+            label: "A Look Inside — collage"
+            widget: "list"
+            fields:
+              - { name: "image", label: "Photo", widget: "image" }
+              - { name: "alt", label: "Photo description", widget: "string" }
+              - { name: "caption", label: "Caption", widget: "string" }
+          - name: "instagram"
+            label: "Instagram grid"
+            widget: "list"
+            fields:
+              - { name: "image", label: "Photo", widget: "image" }
+              - { name: "alt", label: "Photo description", widget: "string" }
+              - { name: "caption", label: "Caption", widget: "string" }
+              - { name: "post_url", label: "Instagram post link", widget: "string" }

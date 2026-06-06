@@ -2,3 +2,5 @@ _qa/
 .DS_Store
 node_modules/
 *.log
+_headers
+
