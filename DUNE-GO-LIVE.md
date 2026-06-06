@@ -19,7 +19,7 @@ Go to decapbridge.com → Sign up. Free tier (3 sites, 10 people each) is plenty
 "Add a site," then:
 - **Git provider:** GitHub
 - **Repository:** `Jacksons05/dunemv-site`
-- **Decap login URL:** `https://YOUR-NETLIFY-SITE.netlify.app/admin/index.html`
+- **Decap login URL:** `https://dune-mv.netlify.app/admin/index.html`
   (the marketing site's Netlify address — NOT dunemv.com, which is the Shopify store)
 - **Auth type:** Classic (email + password) — simplest for the owner.
 
@@ -49,7 +49,7 @@ DecapBridge gave you. Keep everything below it, and make sure it still says
 3. **Domains:** nothing to do — you're on the Netlify URL for now. (Later: point a
    subdomain of dunemv.com at Netlify, leaving the Shopify store alone.)
 4. **Push & check:** `git push`, wait for "Published," then open
-   `YOUR-NETLIFY-SITE.netlify.app/admin` — branded login, no error = success.
+   `dune-mv.netlify.app/admin` — branded login, no error = success.
    (Not dunemv.com/admin — that's the Shopify store.)
 
 ### 7 · Invite the owner

@@ -37,13 +37,13 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 # Where the MARKETING SITE itself lives — this is the Netlify address, NOT
-# dunemv.com (that's the Shopify store). Replace YOUR-NETLIFY-SITE with the real
+# dunemv.com (that's the Shopify store). Replace dune-mv with the real
 # name once the Netlify site exists (you can rename it in Netlify › Site settings).
 # These drive the editor's "View live" links — they must point at the marketing
 # site, not the store.
-site_url: https://YOUR-NETLIFY-SITE.netlify.app
-display_url: https://YOUR-NETLIFY-SITE.netlify.app
-logo_url: https://YOUR-NETLIFY-SITE.netlify.app/images/dune-logo.png
+site_url: https://dune-mv.netlify.app
+display_url: https://dune-mv.netlify.app
+logo_url: https://dune-mv.netlify.app/images/dune-logo.png
 
 # A friendly note shown at the top of the editor.
 # (Decap shows collection descriptions inline.)
